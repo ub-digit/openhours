@@ -26,7 +26,7 @@ class Openhour < ActiveRecord::Base
   def self.get_weekday_day(location_id, day)
     wday = WEEKDAYS[day.wday-1]
     Openhour.where(lokal_id: location_id).where(day: wday)
-      .where("from_dag < ?", datestring(day))
+      .where("from_dag <= ?", datestring(day))
       .order(:from_dag).reverse_order
   end
 
