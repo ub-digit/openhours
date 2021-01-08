@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+
+  api:
+    image: docker.ub.gu.se/openhours2:dev-2021.01.001
+    environment:
+      - DB_HOST=${DEFAULT_DB_HOST}
+      - DB_PORT=${DEFAULT_DB_PORT}
+      - DB_NAME=${DEFAULT_DB_NAME}
+      - DB_USER=${DEFAULT_DB_USER}
+      - DB_PASS=${DEFAULT_DB_PASS}
+      - RAILS_ENV=${DEFAULT_RAILS_ENV}
+    ports:
+      - "${EXPOSED_PORT_API}:3000"
+
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_DB=${DEFAULT_DB_NAME}
+      - POSTGRES_USER=${DEFAULT_DB_USER}
+      - POSTGRES_PASSWORD=${DEFAULT_DB_PASS}
+    ports:
+      - "${EXPOSED_PORT_DB}:${DEFAULT_DB_PORT}"
+    volumes:
+      - ${PWD:-.}/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - /data/openhours2/database:/var/lib/postgresql/data
