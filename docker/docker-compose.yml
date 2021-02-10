@@ -2,30 +2,37 @@ version: '3.4'
 
 services:
 
-  api:
-    image: docker.ub.gu.se/openhours2:dev-2021.01.001
+  web:
+    image: ${IMAGE_API}
+#   build: ./api/             # Only for development
+    restart: always
     environment:
-      - DB_HOST=${DEFAULT_DB_HOST}
-      - DB_PORT=${DEFAULT_DB_PORT}
-      - DB_NAME=${DEFAULT_DB_NAME}
-      - DB_USER=${DEFAULT_DB_USER}
-      - DB_PASS=${DEFAULT_DB_PASS}
-      - RAILS_ENV=${DEFAULT_RAILS_ENV}
+      - RAILS_ENV=${RAILS_ENV}
+      - SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE} # Not used in development
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
     ports:
-      - "${EXPOSED_PORT_API}:3000"
-
+      - "${EXPOSED_PORT_API}:${RAILS_PORT}"
+    volumes:                  # Only for development
+      - ./api:/usr/src/app    # Only for development
     depends_on:
       - db
 
   db:
-    image: postgres:11
+    image: ${IMAGE_DB}
     restart: always
     environment:
-      - POSTGRES_DB=${DEFAULT_DB_NAME}
-      - POSTGRES_USER=${DEFAULT_DB_USER}
-      - POSTGRES_PASSWORD=${DEFAULT_DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     ports:
-      - "${EXPOSED_PORT_DB}:${DEFAULT_DB_PORT}"
+      - "${EXPOSED_PORT_DB}:${DB_PORT}"
     volumes:
       - ${PWD:-.}/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-      - /data/openhours2/database:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data # Change dbdata to ${DB_DIR} when not for development
+
+volumes:                      # Only for development
+  dbdata:                     # Only for development
