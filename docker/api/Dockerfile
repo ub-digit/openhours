@@ -34,4 +34,5 @@ RUN        chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Start the main process
-CMD        ["sh", "-c", "rails server -b 0.0.0.0 -e ${RAILS_ENV}"]
+CMD        ["bundle", "exec", "rails", "server",  "-b", "0.0.0.0", "-e", "${RAILS_ENV}"]
+
