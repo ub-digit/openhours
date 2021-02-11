@@ -1,4 +1,4 @@
-# Dockerized openhours2
+# Dockerized openhours
 
 The Docker specific files are located in the `docker` directory:
 
@@ -17,13 +17,13 @@ docker
 Use your real `.env` file instead of the `.env.sample` and follow the instructions below. 
 (The `docker-compose.yml` provided is the one for development.)
 
-If you have access to the openhours2 image referred to in `docker-compose.yml`/`.env`, just follow these steps:
+If you have access to the openhours image referred to in `docker-compose.yml`/`.env`, just follow these steps:
 
 1. Change directory to the `docker` directory.
-2. Copy your openhours2 sql dump file to `docker-entrypoint-initdb.d/`.
-3. Run `docker-compose up`, if you want to run openhours2 in the foreground, or `docker-compose up -d`, if you want to run it [d]etached.
+2. Copy your openhours sql dump file to `docker-entrypoint-initdb.d/`.
+3. Run `docker-compose up`, if you want to run openhours in the foreground, or `docker-compose up -d`, if you want to run it [d]etached.
 
-If you have to build the openhours2 image yourself, start by doing the following:
+If you have to build the openhours image yourself, start by doing the following:
 
 1. Change directory to the parent directory of the `docker` directory.
 2. Copy `docker/api/*` to the current directory.
