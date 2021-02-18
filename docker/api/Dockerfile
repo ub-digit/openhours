@@ -23,7 +23,6 @@ RUN        DEBIAN_FRONTEND=noninteractive \
 # Prepare the environment
 ENV        LANG=en_US.UTF-8
 ENV        LANGUAGE=en_US:en
-ENV        RAILS_LOG_TO_STDOUT=true
 
 # Copy the full context
 COPY       . ./
