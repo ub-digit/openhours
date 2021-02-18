@@ -1,4 +1,6 @@
 .git
+.gitignore
 tmp
 log/*
 !log/.keep
+README.md
