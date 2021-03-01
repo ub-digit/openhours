@@ -42,7 +42,7 @@ Rails.application.configure do
   # config.force_ssl = true
 
   # Log to STDOOUT and set to :debug to see everything in the log.
-  config.logger = Logger.new(STDOUT)
+  config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
