@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
 
-  web:
+  api:
     image: ${IMAGE_API}
 #   build: ./api/             # Only for development
     restart: always
