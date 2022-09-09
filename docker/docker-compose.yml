@@ -16,8 +16,8 @@ services:
       - DB_PASS=${DB_PASS}
     ports:
       - "${EXPOSED_PORT_API}:${RAILS_PORT}"
-    volumes:                  # Only for development
-      - ./api:/usr/src/app    # Only for development
+    #volumes:                  # Only for development
+    #  - ./api:/usr/src/app    # Only for development
     depends_on:
       - db
 
@@ -34,5 +34,20 @@ services:
       - ${PWD:-.}/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - dbdata:/var/lib/postgresql/data # Change dbdata to ${DB_DIR} when not for development
 
+  admin:
+    image: ${IMAGE_ADMIN}
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    ports:
+      - "${EXPOSED_PORT_ADMIN}:${CGI_PORT}"
+    volumes:
+      - admindata:/usr/local/apache2/admin/htpasswd # When running this container for the first time a htpasswd must be created. Change dbdata to ${HTPASSWD_DIR} when not for development
+
 volumes:                      # Only for development
   dbdata:                     # Only for development
+  admindata:                  # Only for development

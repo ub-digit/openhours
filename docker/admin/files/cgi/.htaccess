@@ -1,0 +1,4 @@
+AuthUserFile /usr/local/apache2/admin/htpasswd/.htpasswd
+AuthName Bokningssystemsadministration
+AuthType Basic
+require valid-user
