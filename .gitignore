@@ -19,3 +19,12 @@
 \#*#
 .#*
 
+# Ignore database dir
+#
+docker/database_data
+
+# Ignore database files
+*.sql
+
+# Ignore local gems
+/vendor/bundle

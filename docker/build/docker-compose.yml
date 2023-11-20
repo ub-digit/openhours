@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  api:
+    image: docker.ub.gu.se/openhours:${GIT_REVISION}
+    build:
+      context: ./api
+      args:
+        - GIT_REPO_URL=${GIT_REPO_URL}
+        - GIT_REVISION=${GIT_REVISION}
