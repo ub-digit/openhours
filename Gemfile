@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '7.1.2'
+gem 'rails', '7.2.1'
 
 # Use Puma as Rails server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 5.0'
 
 # Choose sprocket version. Rails is dependent on sprocket-rails which, in turn, is dependent on sprockets.
 gem 'sprockets', '3.7.2'
