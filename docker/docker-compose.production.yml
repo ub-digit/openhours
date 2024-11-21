@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "udp://127.0.0.1:514"
+        syslog-format: "rfc5424"
+        syslog-facility: ${SYSLOG_FACILITY}
+        tag: ${SYSLOG_TAG_API}
+  admin:
+    image: docker.ub.gu.se/openhours-admin:release-2022.09.002
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    ports:
+      - "${EXPOSED_PORT_ADMIN}:${CGI_PORT}"
+    volumes:
+      - ${HTPASSWD_DIR}:/usr/local/apache2/admin/htpasswd
+
