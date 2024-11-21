@@ -19,6 +19,9 @@
 \#*#
 .#*
 
+
+.env
+
 # Ignore database dir
 #
 docker/database_data
@@ -28,3 +31,4 @@ docker/database_data
 
 # Ignore local gems
 /vendor/bundle
+
